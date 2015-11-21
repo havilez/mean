@@ -3,11 +3,11 @@
 /**
  * Module dependencies.
  */
-var config = require('../config'),
+var config = require('../config'), // this executes InitGlobalConfig()
   mongoose = require('./mongoose'),
   express = require('./express'),
   chalk = require('chalk'),
-  seed = require('./seed');
+  seed = require('./seed'); // loads start func in lib/seed.js
 
 function seedDB() {
   if (config.seedDB && config.seedDB.seed) {

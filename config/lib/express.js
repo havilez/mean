@@ -20,7 +20,10 @@ var config = require('../config'),
   path = require('path');
 
 /**
- * Initialize local variables
+ * Initialize local va- app.js loads config/config.js,
+ - upon loading config.js it immediately calls  InitGlobalConfig() in config.js
+ -  app.start() called  from server.js then calls app.init() which initializes mongoose then calls express.init().
+ - , config/mongoose.js, config/express.js and config/seed.js - triggered when these are  set (config.seedDB && config.seedDB.seed) in any of setup files in config/env/<xxxx>.jsriables
  */
 module.exports.initLocalVariables = function (app) {
   // Setting application local variables
