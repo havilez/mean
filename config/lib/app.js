@@ -25,7 +25,7 @@ module.exports.loadModels = function loadModels() {
 
 module.exports.init = function init(callback) {
   mongoose.connect(function (db) {
-    // Initialize express
+    // Initialize express, then call callback function passed to init in start method
     var app = express.init(db);
     if (callback) callback(app, db, config);
 
@@ -35,6 +35,8 @@ module.exports.init = function init(callback) {
 module.exports.start = function start(callback) {
   var _this = this;
 
+  // this is a way to make a call synchronous, such that the server does not respond to a request
+  // until it is fully configured
   _this.init(function (app, db, config) {
 
     // Start the app by listening on <port>
@@ -54,6 +56,8 @@ module.exports.start = function start(callback) {
         console.log(chalk.green('MEAN.JS version:\t\t\t' + config.meanjs['meanjs-version']));
       console.log('--');
 
+      // NOTE: app.start called W/O callback parameter from server.js. app.init IS called with callback parameter
+      // TODO: Not sure why callback is not defined HERE!!!
       if (callback) callback(app, db, config);
     });
 
